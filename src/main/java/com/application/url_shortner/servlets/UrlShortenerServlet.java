@@ -7,6 +7,11 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "UrlShortenerServlet", value = "/UrlShortenerServlet")
 public class UrlShortenerServlet extends HttpServlet {
+    public void doPost(HttpServletRequest request, HttpServletResponse response)throws IOException {
+        
+    }
+
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }

@@ -12,7 +12,7 @@ import org.postgresql.Driver;
 public class ConnectionPool {
     private static final int POOL_SIZE = 5;
     private static final int MAX_POOL_SIZE = 5;
-    private static final String URL = "jdbc:postgresql://localhost:5432/url_shortner";
+    private static final String URL = "jdbc:postgresql://localhost:5432/url_shortener";
     private static final String USERNAME = "bharathkumar";
     private static final String PASSWORD = "Bharath123";
     private List<Connection> connectionPool;
