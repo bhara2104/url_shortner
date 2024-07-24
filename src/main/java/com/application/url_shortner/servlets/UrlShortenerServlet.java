@@ -5,8 +5,8 @@ import java.io.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet(name = "UrlShortnerServlet", value = "/UrlShortnerServlet")
-public class UrlShortnerServlet extends HttpServlet {
+@WebServlet(name = "UrlShortenerServlet", value = "/UrlShortenerServlet")
+public class UrlShortenerServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     }

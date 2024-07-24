@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.application</groupId>
-    <artifactId>url_shortner</artifactId>
+    <artifactId>url_shortener</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>url_shortner</name>
     <packaging>war</packaging>
