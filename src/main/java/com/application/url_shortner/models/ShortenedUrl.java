@@ -34,4 +34,12 @@ public class ShortenedUrl {
     public void increaseAccessCount(){
         accessCount ++ ;
     }
+
+    public ShortenedUrl() {
+    }
+
+    public ShortenedUrl(String originalUrl, int accessCount) {
+        this.originalUrl = originalUrl;
+        this.accessCount = accessCount;
+    }
 }
