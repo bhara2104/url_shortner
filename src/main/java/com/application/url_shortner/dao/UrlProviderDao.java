@@ -28,7 +28,7 @@ public class UrlProviderDao {
     }
 
     public static void saveUrl(String originalUrl, String shortenedUrl) {
-        String sql = "insert into url_shortened(original_url, shortened_url, count) values (?, ?, 0)";
+        String sql = "insert into url_shortened(original_url, shortened_url, access_count) values (?, ?, 0)";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try (Jedis jedis = getJedisConnection()) {
