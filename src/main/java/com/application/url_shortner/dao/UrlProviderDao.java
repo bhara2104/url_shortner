@@ -28,7 +28,7 @@ public class UrlProviderDao {
     }
 
     public static void saveUrl(String originalUrl, String shortenedUrl) {
-        String sql = "insert into url_shortened(original_url, shortened_url, access_count) values (?, ?, 0)";
+        String sql = "insert into url_shortened(original_url, shortened_url, access_count) values (?, ?, ?)";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         try (Jedis jedis = getJedisConnection()) {
@@ -36,6 +36,7 @@ public class UrlProviderDao {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, originalUrl);
             preparedStatement.setString(2, shortenedUrl);
+            preparedStatement.setInt(3,0);
             preparedStatement.executeUpdate();
             jedis.set(shortenedUrl, originalUrl);
         } catch (Exception e) {
