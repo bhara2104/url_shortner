@@ -58,7 +58,7 @@ public class UrlProviderDao {
         ShortenedUrl shortenedUrl1 = new ShortenedUrl();
         try (Jedis jedis = getJedisConnection()) {
             if (jedis.get(shortenedUrl) != null) {
-                shortenedUrl1 = new ShortenedUrl(shortenedUrl, jedis.get(shortenedUrl));
+                shortenedUrl1 = new ShortenedUrl(jedis.get(shortenedUrl),shortenedUrl);
             } else {
                 Connection connection = null;
                 try {
@@ -67,7 +67,7 @@ public class UrlProviderDao {
                     preparedStatement.setString(1, shortenedUrl);
                     resultSet = preparedStatement.executeQuery();
                     if (resultSet.next()) {
-                        shortenedUrl1 = new ShortenedUrl(resultSet.getString("original_string"), resultSet.getInt("count"));
+                        shortenedUrl1 = new ShortenedUrl(resultSet.getString("original_url"), resultSet.getInt("count"));
                         jedis.set(shortenedUrl, shortenedUrl1.getOriginalUrl());
                     }
                 } catch (Exception e) {
