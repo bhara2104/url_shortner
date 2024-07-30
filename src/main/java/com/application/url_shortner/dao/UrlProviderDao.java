@@ -12,12 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UrlProviderDao {
-    public static Connection getConnectionFromConnectionPool() throws SQLException, DbNotReachableException, ClassNotFoundException, DbNotReachableException {
+    public static Connection getConnectionFromConnectionPool() throws SQLException, ClassNotFoundException, DbNotReachableException {
         ConnectionPool connectionPool = ConnectionPool.getConnectionPoolInstance();
         return connectionPool.getConnection();
     }
 
-    public static void removeConnectionFromConnectionPoolInstance(Connection connection) throws SQLException, DbNotReachableException, ClassNotFoundException {
+    public static void removeConnectionFromConnectionPoolInstance(Connection connection) throws DbNotReachableException, ClassNotFoundException {
         ConnectionPool connectionPool = ConnectionPool.getConnectionPoolInstance();
         connectionPool.removeConnection(connection);
     }
@@ -36,7 +36,7 @@ public class UrlProviderDao {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, originalUrl);
             preparedStatement.setString(2, shortenedUrl);
-            preparedStatement.setInt(3,0);
+            preparedStatement.setInt(3, 0);
             preparedStatement.executeUpdate();
             jedis.set(shortenedUrl, originalUrl);
         } catch (Exception e) {
@@ -99,6 +99,14 @@ public class UrlProviderDao {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                removeConnectionFromConnectionPoolInstance(connection);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

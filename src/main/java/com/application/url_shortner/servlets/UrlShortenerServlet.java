@@ -39,6 +39,7 @@ public class UrlShortenerServlet extends HttpServlet {
         ShortenedUrl shortenedUrl = UrlProviderDao.getUrl(shortValue);
         if (shortenedUrl.getOriginalUrl() != null) {
             response.setStatus(200);
+            UrlProviderDao.updateAccessCount(shortValue);
             response.sendRedirect(shortenedUrl.getOriginalUrl());
         } else {
             response.setStatus(404);
