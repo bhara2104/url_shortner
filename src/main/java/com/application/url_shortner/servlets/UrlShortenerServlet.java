@@ -15,7 +15,7 @@ public class UrlShortenerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         String url = request.getParameter("request_url");
         if (url != null && Helper.validateURl(url)) {
-            String shortenedUrl = Base62Converter.encode(url);
+            String shortenedUrl = Base62Converter.generateShortUrl(url);
             if (UrlProviderDao.getUrl(shortenedUrl).getOriginalUrl() == null) {
                 UrlProviderDao.saveUrl(url, shortenedUrl);
             }

@@ -1,20 +1,18 @@
 package com.application.url_shortner.service;
-
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class Base62Converter {
-    private static String BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String BASE_URL = "http://short.url/";
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final int SHORT_URL_LENGTH = 6;
+    private static Random random = new Random();
 
-    public static String encode(String input) {
-        byte[] bytes = input.getBytes(StandardCharsets.UTF_8);
-        BigInteger value = new BigInteger(1, bytes);
-        StringBuilder result = new StringBuilder();
-        while (value.compareTo(BigInteger.ZERO) > 0) {
-            BigInteger[] divmod = value.divideAndRemainder(BigInteger.valueOf(62));
-            result.insert(0, BASE62.charAt(divmod[1].intValue()));
-            value = divmod[0];
+    public static String generateShortUrl(String url) {
+        StringBuilder shortUrl = new StringBuilder(SHORT_URL_LENGTH);
+        for (int i = 0; i < SHORT_URL_LENGTH; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            shortUrl.append(CHARACTERS.charAt(index));
         }
-        return result.length() > 0 ? result.toString() : "0";
+        return shortUrl.toString();
     }
 }
